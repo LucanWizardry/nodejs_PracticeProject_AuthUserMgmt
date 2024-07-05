@@ -11,19 +11,16 @@ let friends = {
 
 // GET request: Retrieve all friends
 router.get("/",(req,res)=>{
-
   // Send JSON response with formatted friends data
   res.send(JSON.stringify(friends,null,4));
-
 });
+
 
 // GET by specific ID request: Retrieve a single friend with email ID
 router.get("/:email",(req,res)=>{
-  
-  // Retrieve the email paramete from the request URL and send the corresponding friend's details
+  // Retrieve the email parameter from the request URL and send the corresponding friend's details
   const emails = req.params.email;
   res.send(friends[email]);
-
 });
 
 
@@ -51,15 +48,21 @@ router.put("/:email", function(req, res) {
 
     if (friend) {  // Check if friend exists
         let DOB = req.body.DOB;
-        // Add similarly for firstName
-        // Add similarly for lastName
+        let firstName = req.body.firstName;
+        let lastName = req.body.lastName;
 
         // Update DOB if provided in request body
         if (DOB) {
             friend["DOB"] = DOB;
         }
         // Add similarly for firstName
+        if (firstName) {
+            friend["firstName"] = firstName;
+        }
         // Add similarly for lastName
+        if (lastName) {
+            friend["lastName"] = lastName;
+        }
 
         friends[email] = friend;  // Update friend details in 'friends' object
         res.send(`Friend with the email ${email} updated.`);
